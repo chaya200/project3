@@ -3,7 +3,6 @@
 import dal from "../Utils/dal_mysql"
 import { SomeModel } from "../Models/someModel"
 import { OkPacket } from "mysql";
-import dal_mysql from "../Utils/dal_mysql";
 
 
 // functions( async / await ) for getting data from DB
@@ -30,8 +29,27 @@ const postFunction = async (something: SomeModel): Promise<SomeModel> => {
 
 } 
 
+const deleteFunction = async (id: number): Promise<void> => {
+    const sql = `
+    DELETE FROM something WHERE id=${id}`
+    const response = await dal.execute(sql);
+    
+}
+
+const updateFunction = async (something: SomeModel): Promise<SomeModel> => {
+    const sql = `
+    UPDATE something 
+    SET firstName = '${something.firstName}'
+    WHERE id = ${something.id}
+    `;
+    const response : OkPacket = await dal.execute(sql);
+    return something;
+}
+
 // exporting 
 export default {
     getFunction,
     postFunction,
+    deleteFunction,
+    updateFunction
 }
