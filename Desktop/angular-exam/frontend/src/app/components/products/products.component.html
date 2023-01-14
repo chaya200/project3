@@ -1,0 +1,31 @@
+
+<table>
+  <tr>
+    <th>id:</th>
+    <th>name</th>
+    <th>category</th>
+    <th>date</th>
+    <th>qty</th>
+    <th>price</th>
+    <th>delete</th>
+    <th>update</th>
+  </tr>
+  <tr *ngFor="let item of myProds" id="{{item.id}}">
+    <td>{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.category}}</td>
+    <td>{{item.date.toLocaleString().slice(0,10)}}</td>
+    <td>{{item.amount}}</td>
+    <td>{{item.price}}</td>
+    <td><button (click)="delProd(item.id)">delete</button></td>
+    <td><button (click)="updateProd(item)" >update</button></td>
+    <!-- //[routerLink]="['/update']" -->
+  </tr>
+</table>
+<!-- <li *ngFor="let item of myProds">
+  <button (click)="delProd(item.id)">delete </button>
+  <button (click)="updateProd(item.id, desc.value,+price.value)">update</button>
+  {{item.desc}}
+  {{item.price}}
+
+</li> -->

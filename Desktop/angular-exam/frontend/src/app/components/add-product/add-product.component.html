@@ -1,0 +1,21 @@
+<div>
+  <label>name:</label>
+  <input type="text" formControlName="name" #name>
+  <br/>
+  <label>category:</label>
+    <select #category>
+      <option  selected disabled>Select category...</option>
+      <option *ngFor="let item of myCat" value="{{item.id}}">{{item.cat_name}}</option>
+    </select>
+    <br/>
+  <label>date:</label>
+  <input type="date"  #date>
+  <br/>
+  <label>qty:</label>
+  <input type="number"  #amount>
+  <br/>
+  <label>price:</label>
+  <input type="number"  #price>
+  <br/>
+  <button (click)="onSubmit({name:name.value,category:+category.value, date:date.value,amount:+amount.value,price:+price.value})">add product</button>
+</div>

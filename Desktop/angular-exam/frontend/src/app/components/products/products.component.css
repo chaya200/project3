@@ -1,0 +1,23 @@
+table {
+	margin:50px auto;
+}
+
+Table,th,td{
+    border:1px solid;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: beige;
+}
+
+tr:nth-child(odd){
+    background-color: white;
+}
+
+thead tr:first-child{
+    background-color: lightgray;
+    font-weight: 900;
+    font-size: 18px;
+}
