@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+html,body
+{
+  margin:0;
+  height:100%;
+  text-align: center;
+  /* background-color: antiquewhite; */
+  font-size: large;
+  padding:0;
+  font-family: 'Muli';
+  /* font-family: 'Roboto Flex', sans-serif; */
+
+}
+a{
+  color: blue;
+}
+.box {
+  /* margin: 10px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px;
+   */
+    /* width:45%; */
+    display: inline-block;
+    border: 2px solid rgb(164, 193, 222);
+    border-radius: 15px;
+    margin-left: 27.5%;
+    padding:10px;
+}
+
+form {
+  width:300px;
+  text-align: left;
+}
+
+form > input, form > button {
+  width: 100%;
+  box-sizing:border-box;
+  margin-bottom: 20px;
+  font-size:large;
+}
+
+form > label {
+  font-size:large;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

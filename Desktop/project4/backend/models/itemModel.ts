@@ -3,7 +3,7 @@
 import mongoose,{Document, Schema} from 'mongoose';
 
 export interface IItemToCart {
-    product_name:Schema.Types.ObjectId;
+    productId:Schema.Types.ObjectId;
     qty:number;
     total_price:number;
     cartId:Schema.Types.ObjectId;
@@ -14,7 +14,7 @@ export interface IItemToCartModel extends Document, IItemToCart{}
 
 const ItemSchema: Schema=new Schema<IItemToCart>({
     
-    product_name: {
+    productId: {
         type:Schema.Types.ObjectId,
         required: [true, "Missing name"],
         ref: "products"

@@ -80,8 +80,8 @@ const deleteProduct=async (request: Request, response: Response, next: NextFunct
 //product by name
 const getProductByName= async (request: Request, response: Response, next: NextFunction) => {
     console.log("hey from product by name");
-    const productName = request.params.name;
-    return ProductModel.findOne({productName:"name"}).populate("categoryId")
+    const name = request.params.name;
+    return ProductModel.findOne({"name":name}).populate("categoryId")
     .then((items)=>{
         items?response.status(200).json(items):response.status(200).json({message:"not found"})
     })
@@ -93,7 +93,7 @@ const getProductByName= async (request: Request, response: Response, next: NextF
 const getProductByCategory=async (request: Request, response: Response, next: NextFunction) => {
     console.log("hey from product by category");
     const productCat = request.params.category;
-    return ProductModel.findOne({productCat:"category"}).populate("categoryId")
+    return ProductModel.find({"categoryId":productCat}).populate("categoryId")
     .then((items)=>{
         items?response.status(200).json(items):response.status(200).json({message:"not found"})
     })

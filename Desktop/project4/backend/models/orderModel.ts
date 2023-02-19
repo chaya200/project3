@@ -3,8 +3,8 @@
 import mongoose,{Document, Schema} from 'mongoose';
 
 export interface IOrder{
-    client:Schema.Types.ObjectId;
-    cart:Schema.Types.ObjectId;
+    clientId:Schema.Types.ObjectId;
+    cartId:Schema.Types.ObjectId;
     sum:number;
     city:string;
     street:string;
@@ -16,12 +16,12 @@ export interface IOrder{
 export interface IOrderModel extends Document, IOrder{} 
 
 const OrderSchema: Schema=new Schema<IOrder>({
-    client: {
+    clientId: {
         type:Schema.Types.ObjectId,
         required: [true, "Missing client"],
         ref: "clients"
     },
-    cart:{
+    cartId:{
         type:Schema.Types.ObjectId,
         required: [true, "Missing Cart number"],
         ref: "carts"

@@ -1,5 +1,13 @@
 import mongoose,{Document, Schema} from 'mongoose';
 
+
+export enum Role {
+    admin = 1,
+    client = 2,
+    guest = 3,
+    
+}
+
 export interface IClient {
     first_name:string;
     last_name:string;
@@ -41,7 +49,7 @@ const ClientSchema: Schema=new Schema<IClient>({
         type:Number,
         required: [true, "Missing id"],
         min: [6, "Id is too short"],
-        max: [10, "Id  is too long"],
+        maxlength: [12, "Id  is too long"],
         // trim: true,
         unique: true
     },
@@ -49,7 +57,7 @@ const ClientSchema: Schema=new Schema<IClient>({
         type:String,
         required: [true, "Missing password"],
         minlength: [8, "Password is too short, should contain at lest 8 chars"],
-        maxlength: [25, "Password  is too long"],
+        // maxlength: [25, "Password  is too long"],
         // trim: true,
         // lowercase: [true,"PAssword should contains lowercase"],
         // uppercase:[true,""],
@@ -68,7 +76,9 @@ const ClientSchema: Schema=new Schema<IClient>({
         maxlength: [20, "Street  is too long"],
     },
     role:{
-        required: [true, "Missing street"],
+        type: Number,
+        required: [true, "missing role"],
+        length: [1],
     }
     },{
         versionKey:false,

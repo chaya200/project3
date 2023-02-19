@@ -6,6 +6,12 @@ import mongoose from "mongoose";
 import logging from './library/logging';
 import product_router from './routers/product.routes';
 import category_router from './routers/category.routes';
+import client_router from './routers/client.routes';
+import cart_router from './routers/cart.routes';
+import order_router from './routers/order.routes';
+import item_router from './routers/item.routes';
+
+
 
 
 
@@ -31,6 +37,11 @@ server.use(cors());
 //routes
 server.use("/product", product_router);
 server.use("/category", category_router);
+server.use("/cart", cart_router);
+server.use("/client", client_router);
+server.use("/order", order_router);
+server.use("/item", item_router);
+
 
 server.listen(3005,()=>{
     // console.log(`server is listening on port : ${config.server.port}`);
