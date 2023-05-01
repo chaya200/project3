@@ -1,0 +1,22 @@
+.order-container{
+  position:relative;
+  padding:15px;
+}
+.order-details{
+  position: absolute;
+  left: 0;
+  border: 2px 2px 2px black;
+  width:40%;
+  /* padding:5px; */
+}
+.order-process{
+  position: absolute;
+  right: 0;
+  border: 2px black;
+  width:40%;
+  padding:5px;
+}
+aside{
+  margin-left:20px;
+
+}

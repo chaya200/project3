@@ -1,0 +1,57 @@
+html, body{
+    height: 100%;
+    text-align:center;
+    margin:0;
+    /* background-image:url(assets/background1.jpg) ; */
+    /* background-image: linear-gradient(burlywood, brown); */
+    color: black;
+}
+.back{
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+}
+a {
+    color: blue;
+}
+
+.box {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px;
+    display: inline-block;
+}
+
+form {
+    width:300px;
+    text-align: left;
+}
+
+form > input, form > button {
+    width: 100%;
+    box-sizing:border-box;
+    margin-bottom: 20px;
+    font-size:x-large;
+}
+
+form > label {
+    font-size:x-large;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ::ng-deep div.mat-form-field-outline-start {
+  border-color: 0 !important;
+}
+
+::ng-deep div.mat-form-field-outline-end {
+  border-color: 0 !important;
+} */

@@ -1,0 +1,9 @@
+<div class="card-container">
+  <img class="border-0" src="{{product.image}}" alt=""/><br/><br/>
+  <div><label>name:</label>{{product.name}}</div>
+  <div><label>price:</label>{{product.price}}&#8362;<br/></div>
+  <div class="button-row">
+    <button class="btn btn-outline-success"  data-toggle="tooltip" data-placement="top" title="Edit product" (click)="updateProduct()" ><mat-icon>create</mat-icon></button>
+    <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete product" (click)="deleteProduct()" ><mat-icon>delete</mat-icon></button>
+  </div>
+</div>

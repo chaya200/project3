@@ -1,0 +1,19 @@
+<div class="order-container">
+  <button class="btn btn-outline-primary" (click)="toLayoutPage()">back to shopping</button>
+
+  <aside>
+    <!-- <div class="search-input">
+      <label for="">Search here: </label> <input [(ngModel)]="searchText" type="search">
+     </div> -->
+    <app-order-details class="order-details" id="htmlData" ></app-order-details>
+  </aside>
+  <main>
+    <router-outlet ></router-outlet>
+
+    <app-order-process class="order-process"></app-order-process>
+
+  </main>
+
+</div>
+
+
