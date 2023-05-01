@@ -10,7 +10,6 @@ const testProds= async (request: Request, response: Response, next: NextFunction
 
 //all products
 const getAllProducts= async (request: Request, response: Response, next: NextFunction) => {
-    
     return ProductModel.find()
     .populate('categoryId')
     .select('-__v')
@@ -54,7 +53,6 @@ const updateProduct=async (request: Request, response: Response, next: NextFunct
     .then((product)=>{
     if(product){
         product.set(request.body);
-
         return product
         .save()
         .then((product)=> response.status(201).json(product))
@@ -69,19 +67,17 @@ const updateProduct=async (request: Request, response: Response, next: NextFunct
 // delete product 
 const deleteProduct=async (request: Request, response: Response, next: NextFunction) => {
     const id = request.params.id;
-
     return ProductModel.findByIdAndDelete(id)
     .then((product)=>
     (product?response.status(201).json({message:"deleted"}):response.status(404).json({message:"not found"})))
     .catch((err)=> next(err));
-
 }
 
 //product by name
 const getProductByName= async (request: Request, response: Response, next: NextFunction) => {
     console.log("hey from product by name");
     const name = request.params.name;
-    return ProductModel.findOne({"name":name}).populate("categoryId")
+    return ProductModel.findOne({name}).populate("categoryId")
     .then((items)=>{
         items?response.status(200).json(items):response.status(200).json({message:"not found"})
     })

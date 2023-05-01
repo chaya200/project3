@@ -1,49 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
-html,body
-{
-  margin:0;
-  height:100%;
-  text-align: center;
-  /* background-color: antiquewhite; */
-  font-size: large;
-  padding:0;
-  font-family: 'Muli';
-  /* font-family: 'Roboto Flex', sans-serif; */
+html, body{
+    height: 100%;
+    text-align:center;
+    margin:0;
+    /* background-image:url(assets/background1.jpg) ; */
+    /* background-image: linear-gradient(burlywood, brown); */
+    color: black;
+}
+.back{
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+}
+a {
+    color: blue;
+}
 
-}
-a{
-  color: blue;
-}
 .box {
-  /* margin: 10px;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px;
-   */
-    /* width:45%; */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px;
     display: inline-block;
-    border: 2px solid rgb(164, 193, 222);
-    border-radius: 15px;
-    margin-left: 27.5%;
-    padding:10px;
 }
 
 form {
-  width:300px;
-  text-align: left;
+    width:300px;
+    text-align: left;
 }
 
 form > input, form > button {
-  width: 100%;
-  box-sizing:border-box;
-  margin-bottom: 20px;
-  font-size:large;
+    width: 100%;
+    box-sizing:border-box;
+    margin-bottom: 20px;
+    font-size:x-large;
 }
 
 form > label {
-  font-size:large;
+    font-size:x-large;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ::ng-deep div.mat-form-field-outline-start {
+  border-color: 0 !important;
+}
+
+::ng-deep div.mat-form-field-outline-end {
+  border-color: 0 !important;
+} */

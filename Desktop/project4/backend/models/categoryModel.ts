@@ -3,8 +3,6 @@ import mongoose,{Document, Schema} from 'mongoose';
 
 export interface ICategory {
     name:string;
-    
-    
 }
 export interface ICategoryModel extends Document, ICategory{} 
 
@@ -22,5 +20,5 @@ const CategorySchema: Schema=new Schema<ICategory>({
     
     
 });
-//the brackets is for the schema??
+
 export default mongoose.model<ICategoryModel>("categories", CategorySchema);

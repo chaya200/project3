@@ -2,7 +2,6 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import  OrderModel  from "../models/orderModel";
 
-
 //test api
 const testOrders= async (request: Request, response: Response, next: NextFunction) => {
     console.log("order is working");
@@ -43,7 +42,6 @@ const addOrder= async (request: Request, response: Response, next: NextFunction)
     .catch((err)=> next(err));
 }
 
-
 // update order
 const updateOrder=async (request: Request, response: Response, next: NextFunction) => {
     const id = request.params.id;
@@ -76,7 +74,7 @@ const deleteOrder=async (request: Request, response: Response, next: NextFunctio
 
 //order by client id
 const getOrderByClientId= async (request: Request, response: Response, next: NextFunction) => {
-    const client_id = request.params._id;
+    const client_id = request.params.id_num;
     return OrderModel.find({"clientId":client_id}).populate(['cartId', 'clientId'])
     .then((items)=>{
         items?response.status(200).json(items):response.status(200).json({message:"not found"})
@@ -84,11 +82,10 @@ const getOrderByClientId= async (request: Request, response: Response, next: Nex
     .catch((err)=> next(err));
 }
 
-
 //order by city
 const getOrdersByCity=async (request: Request, response: Response, next: NextFunction) => {
     const city = request.params.city;
-    return OrderModel.find({"city":city}).populate(['cartId', 'clientId'])
+    return OrderModel.find({city}).populate(['cartId', 'clientId'])
     .then((items)=>{
         items?response.status(200).json(items):response.status(200).json({message:"not found"})
     })

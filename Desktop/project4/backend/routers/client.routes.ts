@@ -3,10 +3,9 @@ import controller from "../controllers/client_controller";
 
 const router = express.Router();
 
-
 router.get("/all", controller.getAllClients);
-router.post("/add/register", controller.register);
-router.post("/add/login", controller.login);
+router.post("/register", controller.register); //register
+router.post("/login", controller.login); //sign in
 router.get("/single/:id", controller.getClientById_num);
 router.get("/name/:name", controller.getClientByName);
 router.patch("/update/:_id", controller.updateClient);

@@ -5,7 +5,7 @@ import ItemModel from "../models/itemModel";
 //get all items by cart
 const getItemsByCart = async (request: Request, response: Response, next: NextFunction) => {
     const cart_id = request.params.cart; 
-    return ItemModel.find({"cartId":cart_id})
+    return ItemModel.find({"cartId" :cart_id})
     .populate(['productId','cartId'])
     .then((items) => {
         items ? response.status(200).json(items):response.status(200).json({message:"not found"})
@@ -19,7 +19,7 @@ const addItem= async (request: Request, response: Response, next: NextFunction) 
         _id:new mongoose.Types.ObjectId(),
         ...item,
     });
-    return newItem
+    return (await newItem.populate(['productId', 'cartId']))
     .save()
     .then((item)=> response.status(201).json(item))
     .catch((err)=> next(err));
@@ -53,9 +53,19 @@ const deleteItem= async (request: Request, response: Response, next: NextFunctio
     .catch((err)=> next(err));
 }
 
+// delete all items 
+const deleteAllItems = async (request: Request, response: Response, next: NextFunction) => {
+    const cart_id = request.params.cart; 
+    return ItemModel.deleteMany({"cartId" :cart_id})
+    .then((item)=>
+    (item?response.status(201).json({message:"deleted all"}):response.status(404).json({message:"err"})))
+    .catch((err)=> next(err));
+}
+
 export default{
     getItemsByCart,
     addItem, 
     updateItem,
-    deleteItem
+    deleteItem,
+    deleteAllItems
 }

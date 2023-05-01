@@ -1,71 +1,119 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { LayoutComponent } from './components/layout-area/layout/layout.component';
 import { HeaderComponent } from './components/layout-area/header/header.component';
-import { AsideComponent } from './components/layout-area/aside/aside.component';
-import { MainComponent } from './components/layout-area/main/main.component';
-import { FooterComponent } from './components/layout-area/footer/footer.component';
-import { MenuComponent } from './components/layout-area/menu/menu.component';
-import { HomeComponent } from './components/home-area/home/home.component';
-import { ProductsListComponent } from './components/products-area/products-list/products-list.component';
-import { CartProductsComponent } from './components/cart-area/cart-products/cart-products.component';
-import { UpdateCartComponent } from './components/cart-area/update-cart/update-cart.component';
-import { EmptyCartComponent } from './components/cart-area/empty-cart/empty-cart.component';
-import { AddProductComponent } from './components/products-area/add-product/add-product.component';
-import { UpdateProductComponent } from './components/products-area/update-product/update-product.component';
-import { OrderFormComponent } from './components/order-area/order-form/order-form.component';
-import { MyOrdersComponent } from './components/order-area/my-orders/my-orders.component';
-import { LoginComponent } from './components/login-area/login/login.component';
-import { RegisterComponent } from './components/login-area/register/register.component';
+import { ProductListComponent } from './components/product-area/product-list/product-list.component';
 import { AboutComponent } from './components/about-area/about/about.component';
-import { SingleProductComponent } from './components/products-area/single-product/single-product.component';
-import { SaleComponent } from './components/home-area/sale/sale.component';
-import { MainAdminComponent } from './components/admin-area/main-admin/main-admin.component';
-import { HomeLoginComponent } from './components/login-area/home-login/home-login.component';
+import { PageNotFoundComponent } from './components/layout-area/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home-area/home/home.component';
+import { AddProductComponent } from './components/product-area/add-product/add-product.component';
+import { CartComponent } from './components/cart-area/cart/cart.component';
+import { OrderComponent } from './components/order-area/order/order.component';
+import { ProductCardComponent } from './components/product-area/product-card/product-card.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { EmptyCartComponent } from './components/cart-area/empty-cart/empty-cart.component';
+import { UpdateCartComponent } from './components/cart-area/update-cart/update-cart.component';
+import { LoginComponent } from './components/login-area/login/login.component';
+import { ContactUsComponent } from './components/about-area/contact-us/contact-us.component';
+import { FooterComponent } from './components/layout-area/footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/login-area/register/register.component';
+import { ItemsCartComponent } from './components/cart-area/items-cart/items-cart.component';
+import { LoginMenuComponent } from './components/login-area/login-menu/login-menu.component';
+import { LayoutAdminComponent } from './components/layout-area/layout-admin/layout-admin.component';
+import { MenuAdminComponent } from './components/layout-area/menu-admin/menu-admin.component';
+import { LoginMainComponent } from './components/login-area/login-main/login-main.component';
+import { MainComponent } from './components/login-area/main/main.component';
+import { LayoutUserComponent } from './components/layout-area/layout-user/layout-user.component';
+import { MenuUserComponent } from './components/layout-area/menu-user/menu-user.component';
+import { HeaderUserComponent } from './components/layout-area/header-user/header-user.component';
+import { ProductCardUserComponent } from './components/product-user-area/product-card-user/product-card-user.component';
+import { ProductListUserComponent } from './components/product-user-area/product-list-user/product-list-user.component';
+import { OrderDetailsComponent } from './components/order-area/order-details/order-details.component';
+import { OrderProcessComponent } from './components/order-area/order-process/order-process.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatDialogActions, MatDialogModule } from '@angular/material/dialog';
+import { OrderCompleteComponent } from './components/order-area/order-complete/order-complete.component';
+import { HighlightSearch } from './highlightSearch';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { UpdateProductComponent } from './components/product-area/update-product/update-product.component';
 
 
 @NgModule({
   declarations: [
-    LayoutComponent,
     HeaderComponent,
-    AsideComponent,
-    MainComponent,
-    FooterComponent,
-    MenuComponent,
-    MenuComponent,
-    HomeComponent,
-    ProductsListComponent,
-    CartProductsComponent,
-    UpdateCartComponent,
-    EmptyCartComponent,
-    AddProductComponent,
-    UpdateProductComponent,
-    OrderFormComponent,
-    MyOrdersComponent,
-    LoginComponent,
-    RegisterComponent,
+    ProductListComponent,
     AboutComponent,
-    SingleProductComponent,
-    SaleComponent,
-    MainAdminComponent,
-    HomeLoginComponent,
+    PageNotFoundComponent,
+    HomeComponent,
+    AddProductComponent,
+    CartComponent,
+    OrderComponent,
+    ProductCardComponent,
+    EmptyCartComponent,
+    UpdateCartComponent,
+    LoginComponent,
+    ContactUsComponent,
+    FooterComponent,
+    RegisterComponent,
+    ItemsCartComponent,
+    LoginMenuComponent,
+    LayoutAdminComponent,
+    MenuAdminComponent,
+    LoginMainComponent,
+    MainComponent,
+    LayoutUserComponent,
+    MenuUserComponent,
+    HeaderUserComponent,
+    ProductCardUserComponent,
+    ProductListUserComponent,
+    OrderDetailsComponent,
+    OrderProcessComponent,
+    OrderCompleteComponent,
+    HighlightSearch,
+    UpdateProductComponent
+
 
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatButtonToggleModule,
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatIconModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule
-
+    NgxPageScrollCoreModule,
+    TableVirtualScrollModule,
+    FormsModule,//Two way binding
+    HttpClientModule, //http
+    ReactiveFormsModule, BrowserAnimationsModule
+  ],
+  exports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule
   ],
   providers: [],
-  bootstrap: [LayoutComponent],
-
+  bootstrap: [LoginMainComponent]
 })
 export class AppModule { }

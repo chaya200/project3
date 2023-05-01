@@ -23,8 +23,8 @@
       "ES2022",
       "dom"
     ],
-    //for you dont need to initialized
-    "strictNullChecks": false
+        //for you dont need to initialized
+        "strictNullChecks": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

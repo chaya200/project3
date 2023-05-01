@@ -1,61 +1,86 @@
-import { Component } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
-import { FormControl, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-
-export function passwordMatchValidator(control: AbstractControl) {
-  const password = control.get('password').value;
-  const confirmPassword = control.get('confirmPassword').value;
-
-  return password === confirmPassword ? null : { passwordMatch: true };
-}
-
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+
+export class RegisterComponent implements OnInit {
 
   public newClient = new ClientModel();
+  public myCountry:string = "israel";
+  public cities: any[];
+  public filteredCities: string[] = [];
+  public myForm: FormGroup;
+  hide = true;
 
-  public RegisterForm = new FormGroup({
-    first_name: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-    last_name: new FormControl('', [Validators.required, Validators.minLength(15)]),
-    id_num: new FormControl('', [Validators.required, Validators.minLength(9)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-    city: new FormControl('', Validators.required),
-    street: new FormControl('', Validators.required)
-  }, { validators: passwordMatchValidator });
+constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router:Router ) {
+this.myForm = this.formBuilder.group({
+  first_name: ['', Validators.required],
+  last_name: ['', Validators.required],
+  email: ['', [Validators.required, Validators.email]],
+  id_num: ['', Validators.required],
+  password: ['', [Validators.required, Validators.minLength(8)]],
+  confirmPassword: [''],
+  city: ['', Validators.required],
+  street: ['', Validators.required]
+}, { validator: this.passwordMatchValidator });
+}
 
-  constructor(private loginService: LoginService,  private router: Router ) {}
-
-
-
-
-  public async Register() {
-    //check if the two passwords are match
-    //  if(this.newClient.password==)
-    console.log(this.newClient);
-    if (this.RegisterForm.invalid) {
-      this.RegisterForm.markAllAsTouched();
-      return;
-    }
-
-      try {
-        console.log(this.newClient);
-        await this.loginService.register(this.newClient);
-        alert("welcome!");
-        this.router.navigateByUrl("/products");
-      }
-      catch (err:any) {
-        console.log(err);
-      }
-    }
-
+public async ngOnInit() {
+  this.cities = await this.loginService.getCities(this.myCountry);
   }
 
+ // custom validator to check if password and confirmPassword fields match
+passwordMatchValidator(formGroup: FormGroup) {
+  const password = formGroup.get('password').value;
+  const confirmPassword = formGroup.get('confirmPassword').value;
+  return password === confirmPassword ? null : { passwordMismatch: true };
+}
+
+public filterCities(searchText: any): void {
+  console.log(searchText);
+
+  this.filteredCities = this.cities.filter(city => city.toLowerCase().includes(searchText.toLowerCase()));
+  console.log(this.filteredCities);
+
+}
+
+public async send() {
+  if (this.myForm.invalid) {
+    // Mark all form controls as touched to trigger the display of validation errors
+    Object.values(this.myForm.controls).forEach(control => {
+      control.markAsTouched();
+    });
+    // Prevent the form from submitting
+    return;
+  }
+
+  // If the form is valid, proceed with sending the data to the backend
+  const formData = this.myForm.value;
+  this.newClient = new ClientModel();
+  this.newClient.first_name = formData.first_name;
+  this.newClient.last_name = formData.last_name;
+  this.newClient.email = formData.email;
+  this.newClient.id_num = formData.id_num;
+  this.newClient.password = formData.password;
+  this.newClient.city = formData.city;
+  this.newClient.street = formData.street;
+  console.log(this.newClient);
+  try{
+    await this.loginService.register(this.newClient);
+    alert(`welcome ${this.newClient.first_name}!`);
+    this.router.navigateByUrl("/login");
+  }
+  catch(err:any){
+    console.log(err);
+    alert(err);
+  }
+}
+
+}

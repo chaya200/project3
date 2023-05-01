@@ -1,7 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import clientModel, { Role } from "../models/clientModel";
-import * as bcrypt from 'bcryptjs';
 
 // get all client 
 const getAllClients = async (request: Request, response: Response, next: NextFunction) => {
@@ -12,11 +11,16 @@ const getAllClients = async (request: Request, response: Response, next: NextFun
 //add client
 const register = async (request: Request, response: Response, next: NextFunction) => {
     const client = request.body;
-    const saltRounds = 10;
-    const hashedPassword = bcrypt.hashSync(client.password, saltRounds);
     const isAdmin=process.env.ADMINS.includes(client.email);
     client.role = isAdmin ? Role.admin : Role.client;
-    client.password = hashedPassword;
+    // Check if the client already exists in the database
+    const existingClient = await clientModel.findOne({ "email": client.email, "first_name": client.first_name  });
+    if (existingClient) {
+        // If the client already exists, return an error message
+        return response.status(400).json({ message: 'Client already exists' });
+    }
+
+    // If the client doesn't exist, create a new client object and save it to the database
     const newClient = new clientModel({
         _id:new mongoose.Types.ObjectId(),
         ...client,
@@ -28,19 +32,10 @@ const register = async (request: Request, response: Response, next: NextFunction
 }
 // login
 const login = async (request: Request, response: Response, next: NextFunction) => {
-    const saltRounds = 10;
     const client = request.body;
-    const hashedPassword = bcrypt.hashSync(client.password, saltRounds);
-    console.log(hashedPassword);
-     return clientModel.findOne({"email":client.email })
-    
-    .then((check_client)=>{
-        if(bcrypt.compareSync(client.password, check_client.password)){
-            response.status(200).json(check_client);
-            console.log(check_client);
-            console.log("match");
-        }
-        
+    return clientModel.findOne({"email":client.email, "password": client.password })
+    .then((client)=>{
+        response.status(200).json(client)
     })
     .catch((err)=> next(err.message));
 }

@@ -1,49 +1,32 @@
-
-import cors from 'cors';
-import dotenv  from 'dotenv';
-import express from 'express';
-import mongoose from "mongoose";
-import logging from './library/logging';
+import cors from "cors";
+import express from "express";
+import config from "./utils/config";
+import dal from "./utils/dal";
 import product_router from './routers/product.routes';
 import category_router from './routers/category.routes';
+import item_router from './routers/item.routes';
 import client_router from './routers/client.routes';
 import cart_router from './routers/cart.routes';
 import order_router from './routers/order.routes';
-import item_router from './routers/item.routes';
+import dotenv  from 'dotenv';
 
-
-
-
-
-const url="mongodb://127.0.0.1:27017";
-const server=express();
-
-mongoose.Promise=global.Promise;
-mongoose.set("strictQuery", false);
-mongoose.connect(url,{
-    retryWrites:true,
-    w: "majority",
-}).then(()=>{logging.info("welcome to mongo!! connected!");})
-.catch((error)=>{
-    logging.error("unable to connect: ");
-    logging.error(error);
-})
-
+const server = express();
 dotenv.config()
-server.use(express.json());
-server.use(cors());
 
+server.use(cors());
+server.use(express.json());
 
 //routes
 server.use("/product", product_router);
 server.use("/category", category_router);
-server.use("/cart", cart_router);
+server.use("/items", item_router);
 server.use("/client", client_router);
+server.use("/cart", cart_router);
 server.use("/order", order_router);
-server.use("/item", item_router);
 
-
-server.listen(3005,()=>{
-    // console.log(`server is listening on port : ${config.server.port}`);
-    console.log(`server is listening on port : 3005`);
-})
+const currentPort = config.port;
+server.listen(currentPort, async () => {
+    //connect to mongo than show he is in the air=listening
+    await dal.connect();
+    console.log(`listening on http://localhost:${currentPort}`);
+});

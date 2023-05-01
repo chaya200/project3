@@ -1,5 +1,3 @@
-// import  ProductModel  from './productModel';
-// import CartModel  from './cartModel';
 import mongoose,{Document, Schema} from 'mongoose';
 
 export interface IItemToCart {
@@ -7,8 +5,6 @@ export interface IItemToCart {
     qty:number;
     total_price:number;
     cartId:Schema.Types.ObjectId;
-    
-    
 }
 export interface IItemToCartModel extends Document, IItemToCart{} 
 
@@ -38,13 +34,4 @@ const ItemSchema: Schema=new Schema<IItemToCart>({
     versionKey:false,
     timestamps:true
 });
-
-
-// ItemSchema.virtual("carts",{
-//     ref:CartModel, //which model you are describing and connect
-//     localFields:"cartId", //which filed in our model is it
-//     foreignFields:"_id", //which filed in category model is it
-//     justOne:true, // is a single object and not array
-    
-// })
 export default mongoose.model<IItemToCartModel>("items", ItemSchema);

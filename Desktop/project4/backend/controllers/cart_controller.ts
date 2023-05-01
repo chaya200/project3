@@ -51,9 +51,23 @@ const deleteCart=async (request: Request, response: Response, next: NextFunction
     .catch((err)=> next(err));
 }
 
+
+//cart by id client
+const getCartByClientId=async (request: Request, response: Response, next: NextFunction) => {
+    console.log("hey from cart by clientId");
+    const clientId = request.params.id;
+    console.log(clientId);
+    return cartModel.find({"clientId":clientId}).populate("clientId")
+    .then((items)=>{
+        items?response.status(200).json(items):response.status(200).json({message:"not found"})
+    })
+    .catch((err)=> next(err));
+}
+
 export default {
     getAllCarts,
     addCart,
     updateCart,
-    deleteCart
+    deleteCart,
+    getCartByClientId
 }

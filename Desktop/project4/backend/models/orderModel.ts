@@ -66,13 +66,4 @@ const OrderSchema: Schema=new Schema<IOrder>({
     
 });
 
-// old way 
-// OrderSchema.virtual("clients",{
-//     ref:ClientModel, //which model you are describing and connect
-//     localField:"client", //which filed in our model is it
-//     foreignField:"_id", //which filed in category model is it
-//     justOne:true, //categoty is a single object and not array
-    
-// })
-
 export default mongoose.model<IOrderModel>("orders", OrderSchema);
