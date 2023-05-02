@@ -5,9 +5,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 20% 80% ;
-    border: 1px solid black;
-    width:100%;
-    
+    /* border: 1px solid black; */
 	}
       
 .Main >header{
@@ -22,5 +20,4 @@
   height: 100%;
   padding: 0.1%;
   margin-right: 0%;
-  
 }

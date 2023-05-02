@@ -31,9 +31,19 @@ function Report(): JSX.Element {
     const [vacations, setVacations]=useState<Vacation[]>([]);
 
     useEffect(()=>{
-        
-        axios.get("http://localhost:3003/admin/vacation/all")
-        .then(response=>setVacations(response.data));
+        let storageVacation = JSON.parse(localStorage.vacations);
+        console.log(storageVacation.length);
+        if(storageVacation.length > 0)
+        {
+            setVacations(storageVacation);
+        }else{
+            axios.get(`http://localhost:3003/admin/vacation/all`)
+            .then(response=>setVacations(response.data));
+            console.log("123");
+            console.log(vacations);
+        }
+        // axios.get("http://localhost:3003/admin/vacation/all")
+        // .then(response=>setVacations(response.data));
         
     },[])
     
@@ -41,9 +51,9 @@ function Report(): JSX.Element {
     const followers=new Array<number>();
     
 
-    vacations.map(item=>{
+    vacations.map(item => {
         if(item.amountOfFollowers>0)
-            names.push(item.destination)
+            names.push(item.destination?item.destination:"");
             followers.push(item.amountOfFollowers);
             
     })
@@ -67,7 +77,7 @@ function Report(): JSX.Element {
     
     return (
         <div className="Report">
-            {/* <header><MenuAdmin/></header> */}
+            <header><MenuAdmin/></header>
             <main><h2>Report</h2></main>
             <Bar className="bar"  data={data} />
             
@@ -77,3 +87,4 @@ function Report(): JSX.Element {
 }
 
 export default Report;
+
